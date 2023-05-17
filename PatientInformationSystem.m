@@ -40,7 +40,7 @@ EditPatient
 	w "Enter Patient SSN (c to cancel): "
 	r pSSN,!
 	if pSSN="c" do
-	w "Operation canceled returning to main menu."
+	. w "Operation canceled returning to main menu."
 	. g MenuSelection
 	if $data(^p(pSSN))=0 do
 	. w "Error, Patient SSN is not found.",!
@@ -58,19 +58,25 @@ EditPatient
 	if choice=1 do
 	. w "Enter new First Name: "
 	. R nF
-	. ^p(pSSN)=nF_pF(2)
+	. s ^p(pSSN)=nF_pF(2)
 	if choice=2 do
 	. w "Enter new Last Name: "
 	. R nL
-	. ^p(pSSN)=pF(1)_nL
+	. s ^p(pSSN)=pF(1)_nL
 	if choice=3 do
 	. w "Enter new Birthday (xxxxxxxx): "
 	. R nB
-	. ^b(^p(pSSN))=nB
+	. s ^b(^p(pSSN))=nB
 	if choice=4 do
 	. w "Enter new SSN (xxxxxxxxx): "
-	. R nB
-	. ^b(^p(pSSN))=nB
+	. R nSSN
+	. s ^p(nSSN)=^p(pSSN)
+	. k ^p(pSSN)
+	. s replaced=0
+	. for i=1:1 quit:replaced=1  do
+	. . if ^s(i)=pSSN do
+	. . . s ^s(i)=nSSN
+	. . . s replaced=1
 	g MenuSelection
 ViewPatient
 	w "**View Patient**",!
@@ -92,7 +98,7 @@ SearchPatient
 	w "Enter Patient SSN (c to cancel): "
 	r pSSN,!
 	if pSSN="c" do
-	w "Operation canceled returning to main menu."
+	. w "Operation canceled returning to main menu."
 	. g MenuSelection
 	if $data(^p(pSSN))=0 do
 	. w "Error, Patient SSN is not found.",!
@@ -102,6 +108,7 @@ SearchPatient
 	w "First Name: ",!,"  "_pF(1),!
 	w "Last Name: ",!,"  "_pF(2),!
 	w "Birthday: ",!,"  "_^b(^p(pSSN)),!
+	w "SSN: ",!,"  "_pSSN,!
 	w "**-----------**",!
 	w "View another patient? (y or n): "
 	r choice,!
