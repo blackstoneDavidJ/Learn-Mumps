@@ -28,9 +28,10 @@
    ```
   Now that we have a file to run, we are almost ready to run it. Next lets open up our terminal and enter the following
   ```
+  ln -s <path-to-your-folder>/*  ~/.fis-gtm/V6.3-003A_x86_64/r
   source /usr/lib/x86_64-linux-gnu/fis-gtm/V6.3-014_x86_64/gtmprofile
   cp -r (path to mumpscode folder)/* $gtmdir/$gtmver/r
-  mumps -run ^helloworld.m
+  mumps -run ^helloworld.m (or) mumps -run ^helloworld
   ```
    - Note, your "V6.3-014_x86_64" version may be different than mine, just replace with which ever was installed.
   And that's it, you should the following output in your terminal.
@@ -38,3 +39,11 @@
   Hello World
   ```
   
+## Troubleshooting
+  - Error: "Error accessing database ... Must be recoved on cluster node"
+  - Solution(not a good one): run commands
+  ```
+  $gtm_dist/mupip rundown -r "*"
+  $gtm_dist/mupip rundown
+  ```
+  - These commands *should* fix the issue :), but deletes all globals
