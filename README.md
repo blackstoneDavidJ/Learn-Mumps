@@ -1,4 +1,4 @@
-# Setup a MUMPS (M) development enviroment in Linux a virtual Machine
+# Setup a MUMPS (GTM) development enviroment in Linux a virtual Machine
 
 ## Setup Ubuntu in a virtual machine (*You can skip this section if you have linux already*)
 1. Download Virtual Box [here](https://www.virtualbox.org/wiki/Downloads). You can use another VM platform, I just know this one is simple and free
