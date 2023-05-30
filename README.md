@@ -16,6 +16,14 @@
    ```
    mkdir mumpscode
    ```
+   Next lets open up our terminal and enter the following
+   - Note, your "V6.3-014_x86_64" version may be different than mine, just replace with which ever was installed.
+   ```
+     source /usr/lib/x86_64-linux-gnu/fis-gtm/V6.3-014_x86_64/gtmprofile
+     ln -s /home/vboxuser/Desktop/mumpscode/*  ~/.fis-gtm/V6.3-014_x86_64/r
+     
+  ```
+   - Note, replace my */home/home/vboxuser/Desktop/mumpscode/* with where your folder is
    Then lets create our first .m file inside that folder
    ```
    cd mumpscode
@@ -26,14 +34,13 @@
    ```
     write "Hello World",!
    ```
-  Now that we have a file to run, we are almost ready to run it. Next lets open up our terminal and enter the following
+  Now for the last step, every time you want to run your mumps file, run these commands (can copy paste it all into the terminal)
   ```
-  ln -s <path-to-your-folder>/*  ~/.fis-gtm/V6.3-003A_x86_64/r
   source /usr/lib/x86_64-linux-gnu/fis-gtm/V6.3-014_x86_64/gtmprofile
-  cp -r (path to mumpscode folder)/* $gtmdir/$gtmver/r
+  cp -r /home/vboxuser/Desktop/mumpscode/* $gtmdir/$gtmver/r
   mumps -run ^helloworld.m (or) mumps -run ^helloworld
   ```
-   - Note, your "V6.3-014_x86_64" version may be different than mine, just replace with which ever was installed.
+  - Note, hellworld.m seems to only work on older version of fis-gtm. try without the file extension.
   And that's it, you should the following output in your terminal.
   ```
   Hello World
