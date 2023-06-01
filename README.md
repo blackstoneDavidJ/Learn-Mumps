@@ -35,7 +35,7 @@
    Now we can add some code to our file. I installed Visual studio [code](https://code.visualstudio.com/download), but you can use vi or nano via the terminal
    (Inside helloworld.m)
    ```
-    write "Hello World",!
+   <insert one tab or space here>write "Hello World",!
    ```
   Now for the last step, every time you want to run your mumps file, run these commands (can copy paste it all into the terminal)
   ```
