@@ -1,6 +1,8 @@
-# Useful Documention
+# Useful Information
 - [fis-gtm Programmer's guide](http://tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/index.html)
 - [fis-gtm Manual](http://www.mumps.cz/gtm/books/pg/UNIX_manual/webhelp/content/preface.html)
+- [VS Code Extension: Language Pack](https://marketplace.visualstudio.com/items?itemName=jewuma.mumps-debug)
+- [VS Code Extension: Syntax highlighting](https://marketplace.visualstudio.com/items?itemName=dsilin.mumps)
 # Setup a MUMPS (GTM) development enviroment in Linux a virtual Machine
 
 ## Setup Ubuntu in a virtual machine (*You can skip this section if you have linux already*)
