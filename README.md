@@ -4,7 +4,6 @@
 - Please feel free to reach out about any changes :) - DJB
 
 # Useful Information
-- 
 - [fis-gtm Programmer's guide](http://tinco.pair.com/bhaskar/gtm/doc/books/pg/UNIX_manual/index.html)
 - [fis-gtm Manual](http://www.mumps.cz/gtm/books/pg/UNIX_manual/webhelp/content/preface.html)
 - [VS Code Extension: Language Pack](https://marketplace.visualstudio.com/items?itemName=jewuma.mumps-debug)
