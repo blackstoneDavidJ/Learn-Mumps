@@ -1,5 +1,5 @@
 Main
-	w "File Reader",!
+	w $$GCS("File Reader","MAGENTA"),!
 	w "1. Edit a file",!
 	w "2. Create a file",!
 	w "3. FilePath Menu",!
@@ -11,13 +11,15 @@ Main
 	. g CreateFile
 	if choice=3 do
 	. g FolderPath
+	if choice=5 do
+	. g KillGlobals
 	else  do
 	. g Exit
 FolderPath
 	if '$data(^FolderPath) do
 	. w "Folder Path has not been set.",!
 	. g EnterFolderPath
-	w "FolderPath Menu",!
+	w $$GCS("Folder Path Menu","MAGENTA"),!
 	w "1. View Folder Path",!
 	w "2. Edit Folder Path",!
 	w "3. Main Menu",!
@@ -29,20 +31,25 @@ FolderPath
 	else  do
 	. g Main
 ViewFolderPath
-	w "Folder Path: ",^FolderPath,!
-	r "Would you like to change path? (y,n): ",choice,!
+	w "Folder Path: ",$$GCS(^FolderPath,"BLUE"),!
+	w "Would you like to change path? (",$$GCS("y","GREEN"),",",$$GCS("n","GREEN"),"): "
+	r choice,!
 	if choice="y" do
 	. g EnterFolderPath
 	g FolderPath
 EnterFolderPath
-	r "Enter new folder path to be saved: ",^FolderPath,!
+	w "Enter new folder path to be saved",", type (",$$GCS("~","RED"),") to stop: "
+	r path
+	if path="~" do
+	. g Main
+	s ^FolderPath=path
 	if $test do
-	. w "Folder Path: ",^FolderPath,", successfully saved!",!
+	. w "Folder Path: ",$$GCS(^FolderPath,"BLUE"),"successfully saved!",!
 	else  do
-	. w "Faled to save path, returning to Menu"
+	. w $$GCS("Faled to save path, returning to Menu","RED")
 	g Main
 EditFile
-	w "Edit File Menu",!
+	w $$GCS("Edit File Menu","MAGENTA"),!
 	w "1. Add to file",!
 	w "2. Create new file",!
 	w "3. Analyze file",!
@@ -60,8 +67,32 @@ EditFile
 	else  do
 	. g Main
 AddToFile
+	if '$data(^FolderPath) do
+	. w "No Folder path set",!
+	. g EnterFolderPath
+	w "Enter the file name in ",$$GCS(^FolderPath,"BLUE")," to add to: ",!
+	r newFile,!
+	s fileWPath=^FolderPath_newFile 
+	s r=$$AddData(fileWPath,newFile)
+	if r=1 do
+	. w $$GCS("Write Successful","GREEN"),!
+	g Main
+CreateFile				
+	if '$data(^FolderPath) do
+	. w "No Folder path set",!
+	. g EnterFolderPath
+	w "Enter the new file in ",$$GCS(^FolderPath,"BLUE"),":",!
+	r newFile,!
+	s fileWPath=^FolderPath_newFile
+	open fileWPath:(newversion:fixed:recordsize=512)
+	s r=$$AddData(fileWPath,newFile)
+	if r=1 do
+	. w $$GCS("Write Successful","GREEN"),!
+	g Main
+AddData(fileWPath,newFile)
+	n data
 	s data=""
-	w "Enter new data into: ",file,", type (~) to stop.",!
+	w "Enter new data into: ",$$GCS(newFile,"BLUE"),", type (",$$GCS("~","RED"),") to stop.",!
 	for  quit:data="~"  do 
 	. open fileWPath:(append:wrap:recordsize=512)	
 	. r data,!
@@ -71,18 +102,17 @@ AddToFile
 	. . use fileWPath
 	. . write data,!
 	. . if $test do
-	. . . w "Data added.",!
+	. . . w $$GCS("Data Added Successfully","GREEN"),!
 	. close fileWPath
-	g Main
-CreateFile
-	s file="/home/vboxuser/Desktop/mumpscode/newText.txt"
-	open file:(newversion:fixed:recordsize=512)
-	use file
-	write "Hello",!
-	close file
-	write "Done creating",!
-	g Main
+	q $test
+GCS(string,color)
+	q $CHAR(27)_^CC(color)_string_$CHAR(27)_^CC("END")
 Exit
-	w "Closing Program",!
+	w $$GCS("Closing Program","RED"),!
 	HALT
-	;	
+AnalyzeFile
+	g Main
+KillGlobals
+	Kill ^FolderPath
+	w "Globals have been deleted.",!
+	HALT
