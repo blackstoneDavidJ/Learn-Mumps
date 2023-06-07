@@ -32,6 +32,7 @@ Operations
 	# ; modulus to find remainder
 	_ ; combine two strings or numbers
 	% ; not sure exactly yet :)
+	: ; used for specific operations, with regards to the context. below has an example I know
 	= ; used to set data to a variable, or comparison operations, like == in java
 SyntaxRules
 ; before each command, you must either put a space or a tab like this, tab is easier i think
