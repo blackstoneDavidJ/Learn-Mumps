@@ -3,7 +3,7 @@
 ; --
 ; Mumps is designed for health systems like vista
 ; has a built in database that is persistantly stored on disk
-; The database structure is a key-value pair that is organzied nodes that have sub nodes
+; The database structure is a key-value pair that is organized nodes that have sub nodes
 ; basically like a tree
 ; --
 ; these can be created with globals with this syntax, globals need the "^"character for definition
@@ -25,6 +25,14 @@ Commands
 	OPEN o 	; open allows you to open devices such as files
 	USE  	; use allows you to use these devices you have previously opened
 ;   there are probably more but these are the ones ive leared so far
+Operations
+	; use operations to perform logic
+	+ ; addition
+	- ; subtraction
+	# ; modulus to find remainder
+	_ ; combine two strings or numbers
+	% ; not sure exactly yet :)
+	= ; used to set data to a variable, or comparison operations, like == in java
 SyntaxRules
 ; before each command, you must either put a space or a tab like this, tab is easier i think
 	write "HELLO WORLD"
