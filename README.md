@@ -1,4 +1,4 @@
-# Pupose
+# Purpose
 - This is a repo that was created in hopes to make a hub of information regarding MUMPS programming, specifically with fis-gtm as it is open source.
 - Here you will find code examples that I wrote, links to useful information, installation guide, and common troubleshooting tips
 - Please feel free to reach out about any changes :) - DJB
