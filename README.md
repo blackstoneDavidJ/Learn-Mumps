@@ -8,6 +8,8 @@
 - [fis-gtm Manual](http://www.mumps.cz/gtm/books/pg/UNIX_manual/webhelp/content/preface.html)
 - [VS Code Extension: Language Pack](https://marketplace.visualstudio.com/items?itemName=jewuma.mumps-debug)
 - [VS Code Extension: Syntax highlighting](https://marketplace.visualstudio.com/items?itemName=dsilin.mumps)
+- [MUMPs / VISTA Tutorial](https://www.youtube.com/playlist?list=PLK0c6PKmcrdAhNmEzI8YFnDmHojqrTINw)
+- [InterSystems Caché Documentation](https://docs.intersystems.com/latest/csp/docbook/DocBook.UI.Page.cls?KEY=GORIENT_ch_intro#GORIENT_intro_sql)
 # Setup a MUMPS (GTM) development enviroment in Linux a virtual Machine
 
 ## Setup Ubuntu in a virtual machine (*You can skip this section if you have linux already*)
