@@ -17,8 +17,19 @@
 2. Download an Ubuntu image [here](https://ubuntu.com/download/desktop)
 3. Install VBox and create a new VM. Select the downloaded image for "iso" and finish through the prompts.
    After setting up the VM and ubuntu installs all the software, your linux distro should be ready to use!
-   - Since its a fresh install of ubuntu, your current user will not have sudo permissions to install software. 
-   
+   - Since its a fresh install of ubuntu, your current user will not have sudo permissions to install software. to give user sudo privileges do this:
+  ```
+  su -
+  nano /etc/sudoers
+  ```
+  Scroll down to #User Privilage Specification and type
+  ```
+  vboxuser ALL=(ALL:ALL) ALL
+  ```
+  Save and type
+  ```
+  logout
+  ```
 ## Installing fis-gtm (MUMPS)
   Open up a terminal and install fis-gtm with 
    ```
