@@ -52,7 +52,7 @@ EditFile
 	w $$GCS("Edit File Menu","MAGENTA"),!
 	w "1. Add to file",!
 	w "2. Create new file",!
-	w "3. Analyze file",!
+	w "3. View File",!
 	w "4. File Path Menu",!
 	w "5. Main Menu",!
 	r "Choice: ",choice,!
@@ -61,7 +61,7 @@ EditFile
 	if choice=2 do
 	. g CreateFile
 	if choice=3 do
-	. g AnalyzeFile
+	. g ViewFile
 	if choice=4 do
 	. g EnterFolderPath
 	else  do
@@ -89,6 +89,33 @@ CreateFile
 	if r=1 do
 	. w $$GCS("Write Successful","GREEN"),!
 	g Main
+ViewFile
+	if '$data(^FolderPath) do
+	. w "No Folder path set",!
+	. g EnterFolderPath
+	w "Enter the file to view in ",$$GCS(^FolderPath,"BLUE"),":",!
+	r newFile,!
+	n line
+	s line="-"
+	s fileWPath=^FolderPath_newFile
+	open fileWPath:(read:wrap:recordsize=512)
+	if $test do
+	. w "Failed to open file",!
+	. g EditFile
+	use fileWPath
+	for i=1:1 quit:($ZEOF)  do
+	. read line
+	. s lines(i)=line
+	. quit:($ZEOF)
+	close fileWPath
+	write $$GCS("-----START-------","GREEN"),!
+	n i
+	s i=1
+	for i=$ORDER(lines(i)):1 quit:'$data(lines(i))  do
+	. write i,": ",lines(i),!
+	write $$GCS("------END------","RED"),!
+	k lines
+	g EditFile
 AddData(fileWPath,newFile)
 	n data
 	s data=""
@@ -110,8 +137,7 @@ GCS(string,color)
 Exit
 	w $$GCS("Closing Program","RED"),!
 	HALT
-AnalyzeFile
-	g Main
+	;	
 KillGlobals
 	Kill ^FolderPath
 	w "Globals have been deleted.",!
