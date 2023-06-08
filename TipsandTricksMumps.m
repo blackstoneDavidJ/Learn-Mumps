@@ -29,6 +29,7 @@ Operations
 	; use operations to perform logic
 	+ ; addition
 	- ; subtraction
+	/ ; division
 	# ; modulus to find remainder
 	_ ; combine two strings or numbers
 	% ; not sure exactly yet :)
