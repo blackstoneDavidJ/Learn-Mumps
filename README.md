@@ -24,7 +24,7 @@
   ```
   Scroll down to #User Privilage Specification and type
   ```
-  vboxuser ALL=(ALL:ALL) ALL
+  <yourloginhere> ALL=(ALL:ALL) ALL
   ```
   Save and type
   ```
