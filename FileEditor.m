@@ -39,7 +39,7 @@ ViewFolderPath
 	g FolderPath
 EnterFolderPath
 	w "Enter new folder path to be saved",", type (",$$GCS("~","RED"),") to stop: "
-	r path
+	r path,!
 	if path="~" do
 	. g Main
 	s ^FolderPath=path
@@ -84,7 +84,7 @@ CreateFile
 	w "Enter the new file in ",$$GCS(^FolderPath,"BLUE"),":",!
 	r newFile,!
 	s fileWPath=^FolderPath_newFile
-	open fileWPath:(newversion:fixed:recordsize=512)
+	open fileWPath:(newversion:wrap:recordsize=512)
 	s r=$$AddData(fileWPath,newFile)
 	if r=1 do
 	. w $$GCS("Write Successful","GREEN"),!
@@ -105,17 +105,53 @@ ViewFile
 	use fileWPath
 	for i=1:1 quit:($ZEOF)  do
 	. read line
-	. s lines(i)=line
+	. s ^lines(i)=line
 	. quit:($ZEOF)
 	close fileWPath
 	write $$GCS("-----START-------","GREEN"),!
 	n i
 	s i=1
-	for i=$ORDER(lines(i)):1 quit:'$data(lines(i))  do
-	. write i,": ",lines(i),!
+	for i=$ORDER(^lines(i)):1 quit:'$data(^lines(i))  do
+	. write i-1,": ",^lines(i),!
 	write $$GCS("------END------","RED"),!
-	k lines
+	w "Would you like to edit a line? (",$$GCS("y","GREEN"),",",$$GCS("n","GREEN"),"): "
+	r choice,!
+	if choice="y" do
+	. g EditFileLines
+	k ^lines
 	g EditFile
+EditFileLines
+	w "Line # to edit ",", type (",$$GCS("~","RED"),") to cancel:"
+	r choice,!
+	if choice="~" do
+	. k ^lines
+	. g EditFile
+	s lineToChange=^lines(choice)
+	w "Line: ",lineToChange,!
+	r "New Line: ",line,!
+	w "Confirm change? (",$$GCS("y","GREEN"),",",$$GCS("n","GREEN"),"): "
+	r choice,!
+	if choice="y" do
+	. s ^lines(choice)=lineToChange
+	. g UpdateFileLines
+	else  do
+	. w "Change reverted.",!
+	. g EditFile
+UpdateFileLines
+	w "File: ",fileWPath,!
+	s fileWPathUpdate=fileWPath
+	open fileWPathUpdate:(write:wrap:recordsize=512)
+	use fileWPath
+	for i=1:1 quit:($ZEOF)  do
+	. write ^lines(i)
+	. quit:($ZEOF)
+	close fileWPath
+	write $$GCS("-----START-------","GREEN"),!
+	n i
+	s i=1
+	for i=$ORDER(^lines(i)):1 quit:'$data(^lines(i))  do
+	. write i,": ",^lines(i),!
+	write $$GCS("------END------","RED"),!
 AddData(fileWPath,newFile)
 	n data
 	s data=""
