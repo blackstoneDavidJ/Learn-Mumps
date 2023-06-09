@@ -86,10 +86,10 @@ MyBlock
 	. GOTO Main
 ; this would loop indefinitly :D
 ; Mumps has a lot of built in functions but the main ones i have used are
-	$data(var)
-	$test
-	$CHAR(64)
-	$random(upperBound)+lowerbound
+	$data(var) ; checks the variable being passed in to see if there is data present, returns false if not
+	$test      ; retunrs true or false on weather the last expression was successful
+	$CHAR(64)  ; returns the character of a given ascii number being passed in
+	$random(upperBound)+lowerbound  ; returns a random number in the given bounds
 ; if you want to create a function that returns somethings after some logic you can do
 Main
 	SET randomNumber=$$GetANumber(100,1)
