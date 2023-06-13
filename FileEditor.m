@@ -38,15 +38,16 @@ ViewFolderPath
 	. g EnterFolderPath
 	g FolderPath
 EnterFolderPath
-	w "Enter new folder path to be saved",", type (",$$GCS("~","RED"),") to stop: "
+	w "Enter new folder path to be saved",", type (",$$GCS("~","RED"),") to stop: ",!
 	r path,!
 	if path="~" do
 	. g Main
-	s ^FolderPath=path
-	if $test do
+	if path'="" do
+	. s ^FolderPath=path
 	. w "Folder Path: ",$$GCS(^FolderPath,"BLUE"),"successfully saved!",!
 	else  do
-	. w $$GCS("Faled to save path, returning to Menu","RED")
+	. w $$GCS("Faled to save path, returning to Menu","RED"),!
+;	. k ^FolderPath
 	g Main
 EditFile
 	w $$GCS("Edit File Menu","MAGENTA"),!
@@ -112,7 +113,7 @@ ViewFile
 	n i
 	s i=1
 	for i=$ORDER(^lines(i)):1 quit:'$data(^lines(i))  do
-	. write i-1,": ",^lines(i),!
+	. write i,": ",^lines(i),!
 	write $$GCS("------END------","RED"),!
 	w "Would you like to edit a line? (",$$GCS("y","GREEN"),",",$$GCS("n","GREEN"),"): "
 	r choice,!
