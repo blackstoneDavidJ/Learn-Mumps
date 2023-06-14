@@ -1,6 +1,7 @@
 Main
 	w $$GCS("File Reader","MAGENTA"),!
-	g SetColor
+	if '$data(^CC) do
+	. g SetColor
 	w "1. Edit a file",!
 	w "2. Create a file",!
 	w "3. FilePath Menu",!
@@ -175,7 +176,7 @@ AddData(fileWPath,newFile)
 	. close fileWPath
 	q $test
 GCS(string,color)
-	q $CHAR(27)_CC(color)_string_$CHAR(27)_CC("END")
+	q $CHAR(27)_^CC(color)_string_$CHAR(27)_^CC("END")
 Exit
 	w $$GCS("Closing Program","RED"),!
 	H
@@ -186,13 +187,14 @@ KillGlobals
 	w "Globals have been deleted.",!
 	H
 SetColor
-	s CC("BLACK")="[30m"
-	s CC("RED")="[31m"
-	s CC("GREEN")="[32m"
-	s CC("YELLOW")="[33m"
-	s CC("BLUE")="[34m"
-	s CC("MAGENTA")="[35m"
-	s CC("CYAN")="[36m"
-	s CC("WHITE")="[37m"
-	s CC("END")="[0m"
+	s ^CC("BLACK")="[30m"
+	s ^CC("RED")="[31m"
+	s ^CC("GREEN")="[32m"
+	s ^CC("YELLOW")="[33m"
+	s ^CC("BLUE")="[34m"
+	s ^CC("MAGENTA")="[35m"
+	s ^CC("CYAN")="[36m"
+	s ^CC("WHITE")="[37m"
+	s ^CC("END")="[0m"
 	g Main
+	;
