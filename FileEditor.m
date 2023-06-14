@@ -175,7 +175,7 @@ AddData(fileWPath,newFile)
 	. close fileWPath
 	q $test
 GCS(string,color)
-	q $CHAR(27)_^CC(color)_string_$CHAR(27)_^CC("END")
+	q $CHAR(27)_CC(color)_string_$CHAR(27)_CC("END")
 Exit
 	w $$GCS("Closing Program","RED"),!
 	H
