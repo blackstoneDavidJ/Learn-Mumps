@@ -1,7 +1,7 @@
 Main
-	w $$GCS("File Reader","MAGENTA"),!
 	if '$data(^CC) do
 	. g SetColor
+	w $$GCS("File Reader","MAGENTA"),!
 	w "1. Edit a file",!
 	w "2. Create a file",!
 	w "3. FilePath Menu",!
