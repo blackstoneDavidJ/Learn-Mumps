@@ -1,5 +1,6 @@
 Main
 	w $$GCS("File Reader","MAGENTA"),!
+	g SetColor
 	w "1. Edit a file",!
 	w "2. Create a file",!
 	w "3. FilePath Menu",!
@@ -184,4 +185,14 @@ KillGlobals
 	k ^lines
 	w "Globals have been deleted.",!
 	H
-	;
+SetColor
+	s CC("BLACK")="[30m"
+	s CC("RED")="[31m"
+	s CC("GREEN")="[32m"
+	s CC("YELLOW")="[33m"
+	s CC("BLUE")="[34m"
+	s CC("MAGENTA")="[35m"
+	s CC("CYAN")="[36m"
+	s CC("WHITE")="[37m"
+	s CC("END")="[0m"
+	g Main
